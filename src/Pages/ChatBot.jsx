@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import ChatbotIcon from '../components/ChatbotIcon'
 import ChatForm from '../components/ChatForm'
 import ChatMessage from '../components/ChatMessage'
-import '../styles/Chatbot.css'
+//import '../styles/Chatbot.css'
 
 const ChatBot = () => {
     const [chatHistory, setChatHistory] = useState([])
