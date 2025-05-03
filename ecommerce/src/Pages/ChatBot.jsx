@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import ChatbotIcon from '../components/ChatbotIcon'
 import ChatForm from '../components/ChatForm'
 import ChatMessage from '../components/ChatMessage'
-//import '../styles/Chatbot.css'
+import '../styles/Chatbot.css'
 
 const ChatBot = () => {
     const [chatHistory, setChatHistory] = useState([])
@@ -43,34 +43,39 @@ const ChatBot = () => {
     }, [chatHistory])
     
     return (
-      <div className='container'>
-        <div className="chatbot-popup">
-  
-          {/* Header del Chatbot*/}
-          <div className="chat-header">
-            <div className="header-info">
-              <ChatbotIcon />
-              <h2 className="logo-text">ChatBot</h2>
+      <div className="chatbot-wrapper">
+        <div className="container">
+          <div className="chatbot-popup">
+            {/* Header del Chatbot */}
+            <div className="chat-header">
+              <div className="header-info">
+                <ChatbotIcon />
+                <h2 className="logo-text">ChatBot</h2>
+              </div>
+              <button className="material-symbols-rounded">keyboard_arrow_down</button>
             </div>
-            <button className="material-symbols-rounded">keyboard_arrow_down</button>
-          </div>
   
-          {/* Body del Chatbot*/}   
-          <div ref={chatBodyRef} className="chat-body">
-            <div className="message bot-message">
-              <ChatbotIcon/>
-              <p className="message-text">
-                Hola, como estas <br/> Como puedo ayudarte el dia de hoy?</p>
+            {/* Body del Chatbot */}
+            <div ref={chatBodyRef} className="chat-body">
+              <div className="message bot-message">
+                <ChatbotIcon />
+                <p className="message-text">
+                  Hola, ¿cómo estás?<br />¿Cómo puedo ayudarte el día de hoy?
+                </p>
+              </div>
+              {chatHistory.map((chat, index) => (
+                <ChatMessage key={index} chat={chat} />
+              ))}
             </div>
-          {/* Para mostrar el mensaje en pantalla*/}
-          {chatHistory.map((chat, index) => (
-            <ChatMessage key={index} chat= {chat}/>
-          ))}
-          </div>
-          {/* Footer del Chatbot*/}  
-          <div className="chat-footer">
-            <ChatForm chatHistory={chatHistory} setChatHistory={setChatHistory} 
-            generateBotResponse={generateBotResponse}/>
+  
+            {/* Footer del Chatbot */}
+            <div className="chat-footer">
+              <ChatForm
+                chatHistory={chatHistory}
+                setChatHistory={setChatHistory}
+                generateBotResponse={generateBotResponse}
+              />
+            </div>
           </div>
         </div>
       </div>
