@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 //import routes from './routes/routes'; esto se descomenta al ir agregando rutas
+import routes from './routes/routes.js'
 const app = express();
 import cors from 'cors'
 
@@ -13,17 +14,21 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS,PATCH');
     res.header('Access-Control-Allow-Credentials', 'true');
     next();
-  });
- 
+});
 
-  const startServer = async () => {
+
+
+const startServer = async () => {
     try {
-        await mongoose.connect("mongodb://localhost:27017/ecommerce");
+        await mongoose.connect("mongodb+srv://utp4321:Lm08OJQ9P8SFg8oy@proyectos.tdxmdtj.mongodb.net/ecommerce?retryWrites=true&w=majority&appName=proyectos");
         console.log('Connected to DB');
         //await createInitialAdmin();
 
         app.use(cors());
         app.use(express.json());
+        app.use('/api', routes);
+        //app.use(cors());
+        //app.use(express.json());
         //app.use(routes);
         
         // Inicia servidor
