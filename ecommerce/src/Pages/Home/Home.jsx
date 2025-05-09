@@ -12,6 +12,7 @@ const Home = () => {
     <div className="py-4">
       <Carrusel imagenes={imagenes} />
     </div>
+    
   );
 }
 

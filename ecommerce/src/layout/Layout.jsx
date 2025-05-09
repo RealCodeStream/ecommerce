@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; 
 import Navbar from '../components/NavBar/Navbar';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom'; 
 import CartModal from "../components/CartModal/CartModal";
+import Footer from '../components/Footer/Footer';
 
 const Layout = () => {
 
   const [carrito, setCarrito] = useState([]);
   const [mostrarCarrito, setMostrarCarrito] = useState(false);
+const location = useLocation();
 
-  // Función para agregar al carrito (¿implementarla como contexto?)
+  
+  const noFooterPages = ['/pagina-sin-footer', '/chatbot']; 
+  const shouldShowFooter = !noFooterPages.includes(location.pathname);
+
+  // Función para agregar al carrito 
   const agregarAlCarrito = (producto) => {
     const itemExistente = carrito.find(item => item.producto.id === producto.id);
     
@@ -55,20 +61,27 @@ const Layout = () => {
     eliminarDelCarrito,
     cambiarCantidad
   };
-  return (
+
+return (
   <div>
-      <Navbar cantidadTotal={cantidadTotal} toggleCarrito={toggleCarrito}/>
-      <Outlet context={carritoUtils}/>
+    <Navbar cantidadTotal={cantidadTotal} toggleCarrito={toggleCarrito} />
+    
+    {/* Agrega padding-top para dejar espacio debajo del navbar fijo */}
+    <div className="pt-20">
+      <Outlet context={carritoUtils} />
+    </div>
 
-      <CartModal 
-        mostrar={mostrarCarrito}
-        carrito={carrito}
-        onClose={() => setMostrarCarrito(false)}
-        cambiarCantidad={cambiarCantidad}
-        eliminarDelCarrito={eliminarDelCarrito}
-      />
+    <CartModal 
+      mostrar={mostrarCarrito}
+      carrito={carrito}
+      onClose={() => setMostrarCarrito(false)}
+      cambiarCantidad={cambiarCantidad}
+      eliminarDelCarrito={eliminarDelCarrito}
+    />
+    
+    {shouldShowFooter && <Footer />}
   </div>
-  )
-}
+);
+};
 
-export default Layout
+export default Layout;

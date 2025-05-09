@@ -14,7 +14,7 @@ const ChatBot = () => {
     };
 
     const lastUserMessage = history[history.length - 1]?.text?.toLowerCase() || "";
-const match = lastUserMessage.match(/(?:tienes disponible|hay disponible|venden|tienes|hay|disponible|tienen en stock)\s+(.*)/i);
+const match = lastUserMessage.match(/(?:tienes disponible|hay disponible|venden|tienes|hay|disponible|tienen en stock|tienen)\s+(.*)/i);
 if (match) {
   const productos = match[1];
   try {
